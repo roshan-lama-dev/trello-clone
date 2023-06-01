@@ -1,0 +1,61 @@
+@import "../../setting";
+
+// this is the sub-board
+.column {
+  // background-color: antiquewhite;
+  // this property takes up any available space
+  flex: 0 0 auto;
+  width: 300px;
+  height: calc(100% - #{$gap});
+  margin-left: $gap;
+
+  > * {
+    background-color: #ebecf0;
+    color: #333;
+    padding: 0 8px;
+  }
+
+  header {
+    padding-left: 15px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  footer {
+    padding-left: 10px;
+    height: 36px;
+    line-height: 36px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  ul.card-list {
+    list-style-type: none;
+    margin: 0;
+    max-height: calc(
+      100% - #{$column-header-height} - #{$column-footer-height}
+    );
+    // set overflow-y : auto to enable the vertical scroll
+    overflow-y: auto;
+
+    // custom scrollbars
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:hover {
+      cursor: pointer;
+    }
+    &::-webkit-scrollbar:vertical {
+      width: 16px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: darken($color: #ebecf0, $amount: 15);
+      border: 4px solid transparent;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
+  }
+}
