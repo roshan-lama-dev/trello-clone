@@ -2,12 +2,11 @@ import React from "react";
 import "./Column.scss";
 import { Card } from "../Card/Card";
 import { Droppable } from "react-beautiful-dnd";
-export const Column = (props) => {
-  const { column } = props;
-  const cards = column.cards;
+export const Column = ({ column, index }) => {
+  console.log(index);
   return (
     <>
-      <Droppable droppableId={column.id}>
+      <Droppable droppableId={index}>
         {/* dropable id must be in strings */}
         {(provided) => {
           return (
@@ -16,11 +15,11 @@ export const Column = (props) => {
                 <header>{column.title}</header>
 
                 <ul className="card-list">
-                  {cards &&
-                    cards.length > 0 &&
-                    cards.map((card, index) => {
-                      return <Card key={card.id} card={card} index={index} />;
-                    })}
+                  {column.items.map((el, index) => {
+                    return (
+                      <Card key={el.id} index={index} card={el} did={el.id} />
+                    );
+                  })}
                 </ul>
                 <footer>Add new job</footer>
               </div>

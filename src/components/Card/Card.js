@@ -1,23 +1,24 @@
 import React from "react";
 import "./Card.scss";
 import { Draggable } from "react-beautiful-dnd";
-export const Card = (props, index) => {
-  const { card } = props;
-
+export const Card = ({ card, index, did }) => {
+  // console.log(card.id, index);
+  // console.log(card);
   return (
     <>
-      <Draggable key={card.id} index={index} draggableId={card.id.toString()}>
-        {(provided) => {
+      <Draggable key={card.id} index={index} draggableId={did}>
+        {(provided, snapshot) => {
+          // console.log(snapshot);
           return (
-            <li
-              className="card-item"
+            <div
+              className={`item ${snapshot.isDragging && "dragging"}`}
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
             >
               {" "}
-              {card.title}
-            </li>
+              {card.name}
+            </div>
           );
         }}
       </Draggable>

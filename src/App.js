@@ -1,4 +1,3 @@
-import { DragDropContext } from "react-beautiful-dnd";
 import { AppBar } from "./components/AppBar/AppBar";
 import { BoardBar } from "./components/BoardBar/BoardBar";
 import { BoardContent } from "./components/BoardContent/BoardContent";
