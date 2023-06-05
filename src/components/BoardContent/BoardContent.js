@@ -6,28 +6,38 @@ import { Column } from "../Column/Column";
 import _ from "lodash";
 import { DragDropContext } from "react-beautiful-dnd";
 import { v4 } from "uuid";
-const item = {
-  id: v4(),
-  name: "Clean the house",
-};
 
-const item2 = {
-  id: v4(),
-  name: "Wash the car",
-};
 export const BoardContent = () => {
+  const [text, setText] = useState("");
   // const [board, setBoard] = useState({});
   const [columndata, setColumnData] = useState({
-    todo: {
-      title: "Todo",
-      items: [item, item2],
+    wantToApply: {
+      title: "Want to Apply",
+      items: [
+        {
+          id: v4(),
+          name: "Software Developer",
+        },
+        {
+          id: v4(),
+          name: "Junoir React Developer",
+        },
+      ],
     },
     "in-progress": {
       title: "In Progress",
       items: [],
     },
-    done: {
-      title: "Completed",
+    interview: {
+      title: "Interview",
+      items: [],
+    },
+    applied: {
+      title: "Applied",
+      items: [],
+    },
+    rejected: {
+      title: "Rejected",
       items: [],
     },
   });
@@ -73,9 +83,37 @@ export const BoardContent = () => {
     });
   };
 
+  const addItem = () => {
+    setColumnData((prev) => {
+      return {
+        ...prev,
+        wantToApply: {
+          title: "Want To Apply",
+          items: [
+            {
+              id: v4(),
+              name: text,
+            },
+            ...prev.wantToApply.items,
+          ],
+        },
+      };
+    });
+
+    setText("");
+  };
+
   return (
     <>
       <DragDropContext onDragEnd={handleDragEnd}>
+        <div>
+          <input
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <button onClick={addItem}>Add</button>
+        </div>
         <div className="board-columns">
           {_.map(columndata, (data, id) => {
             // console.log(data);
